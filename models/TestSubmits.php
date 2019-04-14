@@ -48,4 +48,13 @@ class TestSubmits extends \yii\db\ActiveRecord
             'passed_at' => 'Passed At',
         ];
     }
+
+    public function getTest()
+    {
+        return $this->hasOne(Test::class,['id' => 'test_id']);
+    }
+
+    public function getUser() {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
 }

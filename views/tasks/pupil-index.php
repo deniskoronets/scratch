@@ -23,9 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     $btn = [];
 
-                    if (\app\models\TasksSubmits::find()->where(['user_id' => Yii::$app->user->id, 'task_id' => $model->id])->exists()) {
-                        if ($model->blocked_by_test_id) {
-                            $btn[] = '<a href="#" class="btn btn-warning">Пройти тест</a>';
+                    if ($test = \app\models\TasksSubmits::find()->where(['user_id' => Yii::$app->user->id, 'task_id' => $model->id])->one()) {
+
+                        if ($tmp = \app\models\TestSubmits::find()->where(['user_id' => Yii::$app->user->id, 'test_id' => $model->id])->one()) {
+                            $btn[] = 'Вы прошли тест с ' . $tmp->percent_pass . '% правильных ответов';
+
+                        } elseif ($model->test_id) {
+                            $btn[] = '<a href="' . \yii\helpers\Url::to(['tests/pass-test', 'id' => $model->id]) . '" class="btn btn-warning">Пройти тест</a>';
                         } else {
                             $btn[] = 'Вы уже отправили ответ';
                         }

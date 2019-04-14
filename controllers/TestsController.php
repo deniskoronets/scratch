@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\PassTestForm;
 use app\models\TestCreateForm;
+use app\models\TestUpdateForm;
 use Yii;
 use app\models\Test;
 use yii\data\ActiveDataProvider;
@@ -92,10 +94,10 @@ class TestsController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = new TestUpdateForm($this->findModel($id));
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         $right = [];
@@ -103,7 +105,6 @@ class TestsController extends Controller
         foreach (range(1, 4) as $v) {
             $right[$v] = $v;
         }
-
 
         return $this->render('update', [
             'model' => $model,
@@ -139,5 +140,18 @@ class TestsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionPassTest($id)
+    {
+        $model = new PassTestForm($this->findModel($id));
+
+        if ($model->load(Yii::$app->request->post()) && $model->submit()) {
+            return $this->redirect(['tasks/pupil-index']);
+        }
+
+        return $this->render('pass-test', [
+            'model' => $model,
+        ]);
     }
 }

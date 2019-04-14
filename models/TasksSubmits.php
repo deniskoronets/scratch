@@ -14,6 +14,7 @@ use Yii;
  */
 class TasksSubmits extends \yii\db\ActiveRecord
 {
+    const WEB_PATH = '@web/tasks_results/';
     /**
      * {@inheritdoc}
      */
@@ -44,5 +45,19 @@ class TasksSubmits extends \yii\db\ActiveRecord
             'file_path' => 'File Path',
             'submitted_at' => 'Submitted At',
         ];
+    }
+
+    public function getTask()
+    {
+        return $this->hasOne(Tasks::class,['id' => 'task_id']);
+    }
+
+    public function getUser() {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function url()
+    {
+        return Yii::getAlias(self::WEB_PATH . $this->user->username . '/' . $this->file_path);
     }
 }

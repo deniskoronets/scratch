@@ -34,7 +34,7 @@ class m190404_204802_init extends Migration
             'title' => $this->string(),
             'teacher_id' => $this->integer(),
             'content' => 'MEDIUMTEXT',
-            'blocked_by_test_id' => $this->integer(),
+            'test_id' => $this->integer(),
         ], 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
 
         $this->createTable('tests', [

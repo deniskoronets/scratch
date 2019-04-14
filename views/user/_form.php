@@ -22,6 +22,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput() ?>
 
+
+    <?php if ($model instanceof \yii\base\Model) { ?>
+    <?= $form->field($model, 'password')->textInput() ?>
+    <?php } ?>
+
     <?= $form->field($model, 'email')->textInput() ?>
 
     <?= $form->field($model, 'is_teacher')->checkbox() ?>

@@ -48,6 +48,7 @@ AppAsset::register($this);
         if (Yii::$app->user->identity->is_teacher) {
             $nav[] = ['label' => 'Завдання', 'url' => ['/tasks/index']];
             $nav[] = ['label' => 'Тести', 'url' => ['/tests']];
+            $nav[] = ['label' => 'Отчет учеников', 'url' => ['/pupils-report/report']];
         } else {
             $nav[] = ['label' => 'Завдання', 'url' => ['/tasks/pupil-index']];
         }

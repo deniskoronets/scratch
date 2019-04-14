@@ -21,6 +21,8 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property TasksSubmits[] $submittedTasks
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -136,6 +138,17 @@ class User extends ActiveRecord implements IdentityInterface
     public function generateAuthKey()
     {
         return false;
+    }
+
+
+    public function getSubmittedTasks()
+    {
+        return $this->hasMany(TasksSubmits::class, ['user_id' => 'id']);
+    }
+
+    public function getSubmittedTests()
+    {
+        return $this->hasMany(TestSubmits::class, ['user_id' => 'id']);
     }
  
 }

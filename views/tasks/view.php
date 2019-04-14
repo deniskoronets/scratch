@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'teacher_id',
             'content:raw',
-            'blocked_by_test_id',
+            'test_id',
         ],
     ]) ?>
 

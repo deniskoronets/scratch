@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'teacher_id',
             [
-                'label' => 'Блокуэ тест',
-                'attribute' => 'blockingTest.title',
+                'label' => 'Тест',
+                'attribute' => 'test.title',
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -18,7 +18,7 @@ class UserCreateForm extends \yii\base\Model
 		return [
 			[['fio', 'school', 'class', 'username', 'email', 'is_teacher'], 'required'],
             ['username', 'unique', 'targetClass' => User::class],
-            ['fio_teacher', 'safe'],
+            [['fio_teacher','password'], 'safe'],
 		];
 	}
 
@@ -52,7 +52,9 @@ class UserCreateForm extends \yii\base\Model
 		$user = new User;
 		$user->setAttributes($this->attributes);
 
-		$this->password = $this->generateRandomString(8);
+		if (empty($this->password)) {
+            $this->password = $this->generateRandomString(8);
+        }
 
 		$user->setPassword($this->password);
 		$user->password_reset_token = '';

@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
         'preset' => 'basic'
     ]) ?>
 
-    <?= $form->field($model, 'blocked_by_test_id')->dropDownList(\app\models\Test::listOf()) ?>
+    <?= $form->field($model, 'test_id')->dropDownList(\app\models\Test::listOf()) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

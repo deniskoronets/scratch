@@ -11,7 +11,7 @@ use Yii;
  * @property string $title
  * @property int $teacher_id
  * @property string $content
- * @property int $blocked_by_test_id
+ * @property int $test_id
  */
 class Tasks extends \yii\db\ActiveRecord
 {
@@ -29,15 +29,15 @@ class Tasks extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['teacher_id', 'blocked_by_test_id'], 'integer'],
+            [['teacher_id', 'test_id'], 'integer'],
             [['content'], 'string'],
             [['title'], 'string', 'max' => 255],
         ];
     }
 
-    public function getBlockingTest()
+    public function getTest()
     {
-        return $this->hasOne(Test::className(), ['id' => 'blocked_by_test_id']);
+        return $this->hasOne(Test::className(), ['id' => 'test_id']);
     }
 
     /**
@@ -50,7 +50,7 @@ class Tasks extends \yii\db\ActiveRecord
             'title' => 'Title',
             'teacher_id' => 'Teacher ID',
             'content' => 'Content',
-            'blocked_by_test_id' => 'Blocked By Test ID',
+            'test_id' => 'Test ID',
         ];
     }
 }

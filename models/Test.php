@@ -9,6 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string $title
+ *
+ * @property TestQuestions[] $questions
  */
 class Test extends \yii\db\ActiveRecord
 {
@@ -39,6 +41,11 @@ class Test extends \yii\db\ActiveRecord
         return [
             [['title'], 'string', 'max' => 255],
         ];
+    }
+
+    public function getQuestions()
+    {
+        return $this->hasMany(TestQuestions::class, ['test_id' => 'id']);
     }
 
     /**
