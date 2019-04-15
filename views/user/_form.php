@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'username')->textInput() ?>
 
 
-    <?php if ($model instanceof \yii\base\Model) { ?>
+    <?php if (!($model instanceof \app\models\User)) { ?>
     <?= $form->field($model, 'password')->textInput() ?>
     <?php } ?>
 
