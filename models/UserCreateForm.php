@@ -56,6 +56,7 @@ class UserCreateForm extends \yii\base\Model
             $this->password = $this->generateRandomString(8);
         }
 
+
 		$user->setPassword($this->password);
 		$user->password_reset_token = '';
 		if ($this->is_teacher) {
@@ -71,6 +72,15 @@ class UserCreateForm extends \yii\base\Model
 			$this->addError('fio', 'Під час збереження цієї моделі сталася помилка');
 			return false;
 		}
+
+		\Yii::$app->mailer->compose('user-info', [
+		    'username' => $this->username,
+            'password' => $this->password,
+        ])
+            ->setFrom('help@scratch-zp.pp.ua')
+            ->setTo($this->email)
+            ->setSubject('Добро пожаловать!')
+            ->send();
 
 		return true;
 	}

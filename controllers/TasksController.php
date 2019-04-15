@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\SendTaskModel;
+use app\models\TasksSubmits;
 use Yii;
 use app\models\Tasks;
 use yii\data\ActiveDataProvider;
@@ -146,16 +147,14 @@ class TasksController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Tasks model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        Yii::$app->db->transaction(function() use ($id) {
+
+            TasksSubmits::deleteAll(['task_id' => $id]);
+
+            $this->findModel($id)->delete();
+        });
 
         return $this->redirect(['index']);
     }

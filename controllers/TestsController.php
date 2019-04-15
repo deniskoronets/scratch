@@ -3,7 +3,10 @@
 namespace app\controllers;
 
 use app\models\PassTestForm;
+use app\models\Tasks;
 use app\models\TestCreateForm;
+use app\models\TestQuestions;
+use app\models\TestSubmits;
 use app\models\TestUpdateForm;
 use Yii;
 use app\models\Test;
@@ -112,16 +115,21 @@ class TestsController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Test model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        Yii::$app->db->transaction(function() use ($id) {
+
+            TestSubmits::deleteAll(['test_id' => $id]);
+
+            TestQuestions::deleteAll(['test_id' => $id]);
+
+            Tasks::updateAll(
+                ['test_id' => null],
+                ['test_id' => $id]
+            );
+
+            $this->findModel($id)->delete();
+        });
 
         return $this->redirect(['index']);
     }
