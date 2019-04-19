@@ -6,6 +6,13 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 /* @var $form yii\widgets\ActiveForm */
+
+$teachers = [];
+
+foreach (\app\models\User::findAll(['is_teacher' => 1]) as $t) {
+    $teachers[$t->fio] = $t->fio;
+}
+
 ?>
 
 <div class="user-form">
@@ -18,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'class')->textInput() ?>
 
-    <?= $form->field($model, 'fio_teacher')->textInput() ?>
+    <?= $form->field($model, 'fio_teacher')->dropDownList($teachers) ?>
 
     <?= $form->field($model, 'username')->textInput() ?>
 

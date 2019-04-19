@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             $btn[] = 'Вы прошли тест с ' . $tmp->percent_pass . '% правильных ответов';
 
                         } elseif ($model->test_id) {
-                            $btn[] = '<a href="' . \yii\helpers\Url::to(['tests/pass-test', 'id' => $model->id]) . '" class="btn btn-warning">Пройти тест</a>';
+                            $btn[] = '<a href="' . \yii\helpers\Url::to(['tests/pass-test', 'id' => $model->test_id]) . '" class="btn btn-warning">Пройти тест</a>';
                         } else {
                             $btn[] = 'Вы уже отправили ответ';
                         }
