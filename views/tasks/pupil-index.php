@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     if ($test = \app\models\TasksSubmits::find()->where(['user_id' => Yii::$app->user->id, 'task_id' => $model->id])->one()) {
 
-                        if ($tmp = \app\models\TestSubmits::find()->where(['user_id' => Yii::$app->user->id, 'test_id' => $model->id])->one()) {
+                        if ($tmp = \app\models\TestSubmits::find()->where(['user_id' => Yii::$app->user->id, 'test_id' => $model->test_id])->one()) {
                             $btn[] = 'Вы прошли тест с ' . $tmp->percent_pass . '% правильных ответов';
 
                         } elseif ($model->test_id) {
