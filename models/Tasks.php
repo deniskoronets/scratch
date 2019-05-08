@@ -32,6 +32,7 @@ class Tasks extends \yii\db\ActiveRecord
             [['teacher_id', 'test_id'], 'integer'],
             [['content'], 'string'],
             [['title'], 'string', 'max' => 255],
+            ['class_id', 'safe'],
         ];
     }
 
@@ -52,5 +53,10 @@ class Tasks extends \yii\db\ActiveRecord
             'content' => 'Content',
             'test_id' => 'Test ID',
         ];
+    }
+
+    public function getClass()
+    {
+        return $this->hasOne(ClassModel::class, ['id' => 'class_id']);
     }
 }

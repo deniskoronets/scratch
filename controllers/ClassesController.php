@@ -2,21 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\SendTaskModel;
-use app\models\TasksSubmits;
 use Yii;
-use app\models\Tasks;
+use app\models\ClassModel;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * TasksController implements the CRUD actions for Tasks model.
+ * ClassesController implements the CRUD actions for ClassModel model.
  */
-class TasksController extends Controller
+class ClassesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -34,13 +30,13 @@ class TasksController extends Controller
     }
 
     /**
-     * Lists all Tasks models.
+     * Lists all ClassModel models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Tasks::find(),
+            'query' => ClassModel::find(),
         ]);
 
         return $this->render('index', [
@@ -48,43 +44,8 @@ class TasksController extends Controller
         ]);
     }
 
-    public function actionPupilIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Tasks::find()->where(['class_id' => \Yii::$app->user->identity->class_id]),
-        ]);
-
-        return $this->render('pupil-index.php', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionSend($id)
-    {
-        if (Yii::$app->user->identity->is_teacher) {
-            throw new ForbiddenHttpException('No access');
-        }
-
-        $model = $this->findModel($id);
-
-        $model = new SendTaskModel($model);
-
-        if (Yii::$app->request->isPost) {
-
-            $model->answer = UploadedFile::getInstance($model, 'answer');
-
-            if ($model->save()) {
-                return $this->redirect('pupil-index');
-            }
-        }
-
-        return $this->render('send', [
-            'model' => $model,
-        ]);
-    }
-
     /**
-     * Displays a single Tasks model.
+     * Displays a single ClassModel model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -96,27 +57,14 @@ class TasksController extends Controller
         ]);
     }
 
-    public function actionPupilView($id)
-    {
-        if (Yii::$app->user->identity->is_teacher) {
-            throw new ForbiddenHttpException('No access');
-        }
-
-        return $this->render('pupil-view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
     /**
-     * Creates a new Tasks model.
+     * Creates a new ClassModel model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tasks();
-
-        $model->teacher_id = Yii::$app->user->id;
+        $model = new ClassModel();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -128,7 +76,7 @@ class TasksController extends Controller
     }
 
     /**
-     * Updates an existing Tasks model.
+     * Updates an existing ClassModel model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -147,28 +95,30 @@ class TasksController extends Controller
         ]);
     }
 
+    /**
+     * Deletes an existing ClassModel model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionDelete($id)
     {
-        Yii::$app->db->transaction(function() use ($id) {
-
-            TasksSubmits::deleteAll(['task_id' => $id]);
-
-            $this->findModel($id)->delete();
-        });
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Tasks model based on its primary key value.
+     * Finds the ClassModel model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tasks the loaded model
+     * @return ClassModel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tasks::findOne($id)) !== null) {
+        if (($model = ClassModel::findOne($id)) !== null) {
             return $model;
         }
 

@@ -6,7 +6,7 @@ class UserCreateForm extends \yii\base\Model
 {
 	public $fio;
 	public $school;
-	public $class;
+	public $class_id;
 	public $fio_teacher;
 	public $username;
 	public $email;
@@ -16,7 +16,8 @@ class UserCreateForm extends \yii\base\Model
 	public function rules()
 	{
 		return [
-			[['fio', 'school', 'class', 'username', 'email', 'is_teacher'], 'required'],
+			[['fio', 'school', 'username', 'email', 'is_teacher'], 'required'],
+            ['class_id', 'safe'],
             ['username', 'unique', 'targetClass' => User::class],
             [['fio_teacher','password'], 'safe'],
 		];
@@ -39,7 +40,7 @@ class UserCreateForm extends \yii\base\Model
             'school' => 'Школа',
             'fio_teacher' => 'Викладач учня',
             'username' => 'Користувач',
-            'class' => 'Класс',
+            'class_id' => 'Класс',
             'is_teacher' => 'Вчитель?',
         ];
     }

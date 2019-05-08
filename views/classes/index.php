@@ -6,15 +6,15 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Завдання';
+$this->title = 'Class Models';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tasks-index">
+<div class="class-model-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Створити завдання', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Class Model', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -23,16 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
-            'teacher_id',
-            [
-                    'attribute' => 'class.name',
-                    'label' => 'Класс',
-            ],
-            [
-                'label' => 'Тест',
-                'attribute' => 'test.title',
-            ],
+            'name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

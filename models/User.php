@@ -53,10 +53,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['fio', 'school', 'class', 'username', 'email', 'created_at', 'updated_at', 'is_teacher'], 'required'],
+            [['fio', 'school', 'username', 'email', 'created_at', 'updated_at', 'is_teacher'], 'required'],
             [['answer_file_name', 'fio_teacher'], 'safe'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['class_id', 'safe'],
         ];
     }
  
@@ -149,6 +150,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function getSubmittedTests()
     {
         return $this->hasMany(TestSubmits::class, ['user_id' => 'id']);
+    }
+
+    public function getClass()
+    {
+        return $this->hasOne(ClassModel::class, ['id' => 'class_id']);
     }
  
 }

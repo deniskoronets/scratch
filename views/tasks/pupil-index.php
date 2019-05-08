@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Завдання';
+$this->title = 'Завдання (' . (Yii::$app->user->identity->class ?? '-') . ')';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tasks-index">
@@ -30,13 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         } elseif ($model->test_id) {
                             $btn[] = '<a href="' . \yii\helpers\Url::to(['tests/pass-test', 'id' => $model->test_id]) . '" class="btn btn-warning">Пройти тест</a>';
-                            $btn[] = '<a href="' . \yii\helpers\Url::to(['tasks/pupil-view', 'id' => $model->id]) . '" class="btn btn-success">Перегляд завдання</a>';
                         } else {
                             $btn[] = 'Ви вже відправили відповідь';
                         }
-                    } else {
-                        $btn[] = '<a href="' . \yii\helpers\Url::to(['tasks/pupil-view', 'id' => $model->id]) . '" class="btn btn-success">Перегляд завдання</a>';
                     }
+
+                    $btn[] = '<a href="' . \yii\helpers\Url::to(['tasks/pupil-view', 'id' => $model->id]) . '" class="btn btn-success">Перегляд завдання</a>';
 
                     return implode(' ', $btn);
                 }

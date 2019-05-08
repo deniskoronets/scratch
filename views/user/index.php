@@ -27,7 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'fio',
             'school',
-            'class',
+            [
+                    'attribute' => 'class.name',
+                'label' => 'Класс',
+            ],
             [
                 'attribute' => 'teacher_fio',
                 'value' => function($model) {

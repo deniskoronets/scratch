@@ -13,6 +13,11 @@ foreach (\app\models\User::findAll(['is_teacher' => 1]) as $t) {
     $teachers[$t->fio] = $t->fio;
 }
 
+$classes = ['' => 'Без классу'];
+foreach (\app\models\ClassModel::find()->all() as $c) {
+    $classes[$c->id] = $c->name;
+}
+
 ?>
 
 <div class="user-form">
@@ -23,7 +28,7 @@ foreach (\app\models\User::findAll(['is_teacher' => 1]) as $t) {
 
     <?= $form->field($model, 'school')->textInput() ?>
 
-    <?= $form->field($model, 'class')->textInput() ?>
+    <?= $form->field($model, 'class_id')->dropDownList($classes) ?>
 
     <?= $form->field($model, 'fio_teacher')->dropDownList($teachers) ?>
 

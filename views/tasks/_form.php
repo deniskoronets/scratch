@@ -7,6 +7,12 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Tasks */
 /* @var $form yii\widgets\ActiveForm */
+
+$classes = ['' => 'Без классу'];
+foreach (\app\models\ClassModel::find()->all() as $c) {
+    $classes[$c->id] = $c->name;
+}
+
 ?>
 
 <div class="tasks-form">
@@ -23,6 +29,8 @@ use yii\widgets\ActiveForm;
     ]) ?>
 
     <?= $form->field($model, 'test_id')->dropDownList(\app\models\Test::listOf()) ?>
+
+    <?= $form->field($model, 'class_id')->dropDownList($classes) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Зберігти', ['class' => 'btn btn-success']) ?>
