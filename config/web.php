@@ -8,6 +8,7 @@ $config = [
     'name' => 'Мій SCRATCH',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ua-UA',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',

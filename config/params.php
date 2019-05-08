@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'adminEmail' => 'volodyasilver@gmail.com',
+    'adminEmail' => 'exampl@example.com',
 ];
