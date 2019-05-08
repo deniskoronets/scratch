@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pupils report';
+$this->title = 'Звіт учнів';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="test-index">
@@ -22,10 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'school',
             'class',
             [
-                'label' => 'Задания',
+                'label' => 'Завдання',
                 'format' => 'raw',
                 'value' => function(User $user) {
-                    $html = '<b>Задания:</b>';
+                    $html = '<b>Завдання:</b>';
 
                     $html .= '<table class="table">';
 
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     foreach ($user->submittedTests as $test) {
                         $html .= '
                             <tr>
-                                <td>#' . $test->test_id . ': ' . $test->test->title . ', ' . $test->percent_pass . '% correct</td>
+                                <td>#' . $test->test_id . ': ' . $test->test->title . ', ' . $test->percent_pass . '% відповідей</td>
                             </tr>
                         ';
                     }

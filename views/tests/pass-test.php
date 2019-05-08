@@ -7,10 +7,8 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\PassTestForm */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->title = 'Pass Test: ' . $model->test->title;
-$this->params['breadcrumbs'][] = ['label' => 'Tests', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->test->title, 'url' => ['view', 'id' => $model->test->id]];
-$this->params['breadcrumbs'][] = 'Pass';
+$this->title = 'Проходження тесту: ' . $model->test->title;
+
 ?>
 <div class="test-pass">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -39,7 +37,7 @@ $this->params['breadcrumbs'][] = 'Pass';
         <?php } ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Відправити', ['class' => 'btn btn-success']) ?>
         </div>
 
     <?php ActiveForm::end(); ?>

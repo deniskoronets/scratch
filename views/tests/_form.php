@@ -19,13 +19,13 @@ use yii\widgets\ActiveForm;
         <tr>
         <?php for ($i = 0; $i < 4; $i++) { ?>
                 <td>
-                    <?= $form->field($model, 'questions[' . $i . '][question]')->textInput()->label('Вопрос') ?>
+                    <?= $form->field($model, 'questions[' . $i . '][question]')->textInput()->label('Питання') ?>
 
                     <?php for ($j = 1; $j <= 4; $j++) { ?>
-                        <?= $form->field($model, 'questions[' . $i . '][variant_' . $j . ']')->textInput()->label('Ответ ' . $j) ?>
+                        <?= $form->field($model, 'questions[' . $i . '][variant_' . $j . ']')->textInput()->label('Відповідь ' . $j) ?>
                     <?php } ?>
 
-                    <?= $form->field($model, 'questions[' . $i . '][right_variant]')->dropDownList($variants)->label('Правильный ответ') ?>
+                    <?= $form->field($model, 'questions[' . $i . '][right_variant]')->dropDownList($variants)->label('Правильна відповідь') ?>
                 </td>
 
         <?php } ?>
@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
     <?php } ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Зберігти', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

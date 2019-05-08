@@ -22,10 +22,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'task', 'send','user','download'],
+                'only' => ['logout', 'task', 'send','user','download','about'],
                 'rules' => [
                     [
-                        'actions' => ['logout', 'task', 'send','user','download'],
+                        'actions' => ['logout', 'task', 'send','user','download','about'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

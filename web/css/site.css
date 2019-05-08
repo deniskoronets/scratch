@@ -3,6 +3,11 @@ body {
     height: 100%;
 }
 
+.navbar-inverse {
+background-color: #336EFF;
+border-color: #FFFFFF;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;

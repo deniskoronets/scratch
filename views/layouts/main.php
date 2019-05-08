@@ -48,11 +48,10 @@ AppAsset::register($this);
         if (Yii::$app->user->identity->is_teacher) {
             $nav[] = ['label' => 'Завдання', 'url' => ['/tasks/index']];
             $nav[] = ['label' => 'Тести', 'url' => ['/tests']];
-            $nav[] = ['label' => 'Отчет учеников', 'url' => ['/pupils-report/report']];
+            $nav[] = ['label' => 'Звіт учнів', 'url' => ['/pupils-report/report']];
         } else {
             $nav[] = ['label' => 'Завдання', 'url' => ['/tasks/pupil-index']];
         }
-
         $nav[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
